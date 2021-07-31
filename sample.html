@@ -17,8 +17,8 @@
       ctx.fillRect(10 * i, 10 * i, 10, 10);
     }
 
-    const image = new Image()
-    image.src = "https://precious.ismcdn.jp/mwimgs/c/3/1080/img_c329b2977f0c543bb74a7e1b39dbfa47698703.jpg"
+    const image = new Image();
+    image.src = "https://precious.ismcdn.jp/mwimgs/c/3/1080/img_c329b2977f0c543bb74a7e1b39dbfa47698703.jpg";
 
     // 画像の位置を自動的に動かしながら描画させる
     let x = 0;
@@ -28,7 +28,7 @@
       y += 10;
       ctx.drawImage(image, x, y, 100, 100);
     }
-    setInterval(move(),  1000);
+    setInterval(move, 1000);
 	</script>
 </body>
 </html>
