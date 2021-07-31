@@ -18,17 +18,35 @@
     }
 
     const image = new Image();
-    image.src = "https://precious.ismcdn.jp/mwimgs/c/3/1080/img_c329b2977f0c543bb74a7e1b39dbfa47698703.jpg";
+    image.src = "./folder/フクロウVer1/64/右.png";
 
-    // 画像の位置を自動的に動かしながら描画させる
+    // キーボードイベントに応じて画像を動かす
     let x = 0;
     let y = 0;
-    function move() {
-      x += 10;
-      y += 10;
+
+    document.addEventListener('keydown', move);
+
+    function move(e) {
+      ctx.clearRect(0,0,500,500);
+      console.log(`${e.code}`);
+      if(e.code === "ArrowRight") {
+        // キャラクターが右に動く
+        x += 10;
+      }
+      if(e.code === "ArrowLeft") {
+        // キャラクターが左に動く
+        x -= 10;
+      }
+      if(e.code === "ArrowUp") {
+        // キャラクターが上に動く
+        y -= 10;
+      }
+      if(e.code === "ArrowDown") {
+        // キャラクターが下に動く
+        y += 10;
+      }
       ctx.drawImage(image, x, y, 100, 100);
     }
-    setInterval(move, 1000);
 	</script>
 </body>
 </html>
