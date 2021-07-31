@@ -12,40 +12,65 @@
 		const canvas = document.getElementById('canvas');
 		const ctx = canvas.getContext('2d');
 
-		ctx.fillStyle = 'tomato';
-		for(let i=0;i<10;i++){
-      ctx.fillRect(10 * i, 10 * i, 10, 10);
+    class Fukurou {
+      constructor() {
+				this.speedY = 0;
+				this.syosoku = -10;
+				this.juryoku = 1;
+        this.posX = 150;
+        this.posY = 100;
+        this.isJump = false;
+        this.image = new Image();
+        this.image.src = "./folder/フクロウVer1/64/右.png"
+      }
+
+      // 毎フレーム呼び出される処理
+      update() {
+				if(this.isJump) {
+					this.posY += this.speedY;
+					this.speedY += this.juryoku;
+				}
+        if(this.posY > 100) {
+          this.posY = 100;
+          this.isJump = false;
+        }
+        ctx.drawImage(this.image, this.posX, this.posY, 20, 20);
+      }
+
+      move(e) {
+        if(e.code === "ArrowRight") {
+          this.posX += 10;
+        }
+        else if(e.code === "ArrowLeft") {
+          this.posX -= 10;
+        }
+        else if(e.code === "ArrowUp") {
+          this.jump();
+        }
+      }
+
+      jump() {
+        // 重力加速度とか計算して飛び上がってるかのように動作する
+				console.log("jump");
+				this.isJump = true;
+				this.speedY = this.syosoku;
+      }
     }
 
-    const image = new Image();
-    image.src = "./folder/フクロウVer1/64/右.png";
+    let fukurou = new Fukurou()
 
-    // キーボードイベントに応じて画像を動かす
-    let x = 0;
-    let y = 0;
-
-    document.addEventListener('keydown', move);
-
-    function move(e) {
+    function loop() {
       ctx.clearRect(0,0,500,500);
-      console.log(`${e.code}`);
-      if(e.code === "ArrowRight") {
-        // キャラクターが右に動く
-        x += 10;
+      fukurou.update();
+      window.requestAnimationFrame(loop);
+    }
+
+    loop();
+
+		window.onkeydown = (event) => {
+			if(event.code === "ArrowUp") {
+				fukurou.jump();
       }
-      if(e.code === "ArrowLeft") {
-        // キャラクターが左に動く
-        x -= 10;
-      }
-      if(e.code === "ArrowUp") {
-        // キャラクターが上に動く
-        y -= 10;
-      }
-      if(e.code === "ArrowDown") {
-        // キャラクターが下に動く
-        y += 10;
-      }
-      ctx.drawImage(image, x, y, 100, 100);
     }
 	</script>
 </body>
