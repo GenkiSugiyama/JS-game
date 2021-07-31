@@ -20,19 +20,14 @@
     const image = new Image()
     image.src = "https://precious.ismcdn.jp/mwimgs/c/3/1080/img_c329b2977f0c543bb74a7e1b39dbfa47698703.jpg"
 
-    image.onload = () => {
-      ctx.drawImage(image, 0, 0, 100, 100)
-    }
-
+    // 画像の位置を自動的に動かしながら描画させる
     let x = 0;
     let y = 0;
-
     function move() {
       x += 10;
       y += 10;
       ctx.drawImage(image, x, y, 100, 100);
     }
-
     setInterval(move(),  1000);
 	</script>
 </body>
